@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """Detector that can be used to experiment with different carrier peak
 interpolation methods.
@@ -16,10 +16,10 @@ from thrifty.experimental import carrier_interpolators
 
 class InterpolationDetector(Detector):
     def __init__(self, settings, blocks, rxid=-1, method=None, width=6):
-        super(InterpolationDetector, self).__init__(settings, blocks, rxid)
+        super().__init__(settings, blocks, rxid)
 
         if method is not None:
-            if isinstance(method, basestring):
+            if isinstance(method, str):
                 if method == 'none':
                     interpolator = carrier_interpolators.none
                 elif method == 'parabolic':

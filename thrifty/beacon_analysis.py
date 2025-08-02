@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Analyze the difference in SOA of a beacon between two receivers.

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """Detector that can be used to experiment with different correlation peak
 interpolation methods.
@@ -19,14 +19,14 @@ from thrifty.experimental import xcorr_interpolators
 
 class IterativeSoaEstimator(SoaEstimator):
     def __init__(self, **args):
-        super(IterativeSoaEstimator, self).__init__(**args)
+        super().__init__(**args)
         self._iterative = xcorr_interpolators.make_maximise(args['template'])
         self._last_fft = None
         self.interpolate = self.iterative_interpolate
 
     def soa_estimate(self, fft):
         self._last_fft = fft
-        return super(IterativeSoaEstimator, self).soa_estimate(fft)
+        return super().soa_estimate(fft)
 
     def iterative_interpolate(self, corr_mag, peak_idx):
         signal = self._last_fft.ifft
@@ -36,7 +36,7 @@ class IterativeSoaEstimator(SoaEstimator):
 
 class InterpolationDetector(Detector):
     def __init__(self, settings, blocks, rxid=-1, method='gaussian'):
-        super(InterpolationDetector, self).__init__(settings, blocks, rxid)
+        super().__init__(settings, blocks, rxid)
 
         if method == 'maximise':
             self.soa_estimate = IterativeSoaEstimator(

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """Detector that uses precomputed shifted template to compensate for the
 carrier frequency offset.
@@ -47,8 +47,8 @@ class TemplateShifts(object):
 class PreshiftDetector(Detector):
     def __init__(self, settings, blocks, rxid=-1, yield_data=False,
                  num=NUM_TEMPLATES, interpolator=parabolic, corr_shift=False):
-        super(PreshiftDetector, self).__init__(settings, blocks,
-                                               rxid, yield_data)
+        super().__init__(settings, blocks,
+                         rxid, yield_data)
         self.block_len = settings.block_len
         self.sync.shifter = self.freq_shift_postpone
         self.soa_estimate.despread = self.despread_shift
@@ -83,8 +83,8 @@ class PreshiftDetector(Detector):
 class DefaultDetector(Detector):
     def __init__(self, settings, blocks, rxid=-1, yield_data=False,
                  integer_shift=False, interpolator=parabolic):
-        super(DefaultDetector, self).__init__(settings, blocks,
-                                              rxid, yield_data)
+        super().__init__(settings, blocks,
+                         rxid, yield_data)
         if integer_shift:
             self.sync.shifter = freq_shift_integer
         if interpolator is not None:

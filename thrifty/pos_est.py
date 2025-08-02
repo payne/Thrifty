@@ -1,11 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Estimate position from TDOA values.
 """
-
-from __future__ import division
-from __future__ import print_function
 
 import scipy.optimize
 import numpy as np
@@ -30,8 +27,8 @@ class EstimationError(Exception):
 
 def solve_1d(tdoa_array, rx_pos):
     """Simple 1D position estimator for 2xRX."""
-    rx0 = rx_pos.keys()[0]
-    rx1 = rx_pos.keys()[1]
+    rx0 = list(rx_pos.keys())[0]
+    rx1 = list(rx_pos.keys())[1]
 
     assert len(rx_pos) == 2
     assert len(rx_pos[rx0]) == 1
@@ -63,7 +60,7 @@ def solve_numerically(tdoa_array, rx_pos):
     if len(uniq_rx) < dims + 1:
         raise EstimationError("Underdetermined")
 
-    rx_coords = np.array(rx_pos.values())
+    rx_coords = np.array(list(rx_pos.values()))
     min_bounds = np.amin(rx_coords, axis=0) - MAX_DIST
     max_bounds = np.amax(rx_coords, axis=0) + MAX_DIST
 
@@ -128,7 +125,7 @@ def dop(pos, rx_pos, rx_pairs):
 def solve(tdoa_groups, rx_pos):
     # TODO: estimate confidence with SNR and DOP and return with pos
     num_rx = len(rx_pos)
-    dimensions = len(rx_pos[rx_pos.keys()[0]])
+    dimensions = len(rx_pos[list(rx_pos.keys())[0]])
 
     results = []
     for group_id, timestamp, tx, tdoas in tdoa_groups:

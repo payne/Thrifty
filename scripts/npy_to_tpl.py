@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # TODO: don't use native endianness, but standardize on either little
 #       or big endian
 # TODO: use struct to pack data explicitly

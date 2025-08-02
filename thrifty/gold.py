@@ -5,9 +5,6 @@ Implementation is based on the gold code module in Matthew Baker's Signal
 Processing Library (https://mubeta06.github.io/python/sp/) (LGPL license).
 """
 
-from __future__ import print_function
-from __future__ import division
-
 import numpy as np
 
 
@@ -74,7 +71,7 @@ def lfsr(taps, init):
     seq = np.zeros(seq_len, dtype='bool')
     seq[:len(init)] = init
 
-    for i in xrange(len(init), seq_len):
+    for i in range(len(init), seq_len):
         seq[i] = seq[i - len(init)]
         for tap in taps:
             seq[i] ^= seq[i - len(init) + tap]
@@ -136,7 +133,7 @@ def _main():
     if args.stats:
         _print_stats(seq)
     else:
-        print(map(int, list(seq)))
+        print(list(map(int, list(seq))))
 
     if args.plot:
         plot(seq)

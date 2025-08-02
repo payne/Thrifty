@@ -231,7 +231,7 @@ def gnuradio_main(samp_rate, gain, freq, block_size):
             x11 = ctypes.cdll.LoadLibrary('libX11.so')
             x11.XInitThreads()
         except:
-            print "Warning: failed to XInitThreads()"
+            print("Warning: failed to XInitThreads()")
 
     from distutils.version import StrictVersion
     if StrictVersion(Qt.qVersion()) >= StrictVersion("4.5.0"):

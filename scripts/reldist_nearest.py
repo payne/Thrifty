@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Calculate distance relative beacon using nearest beacon transmission.
