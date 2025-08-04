@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Estimate TDOA values of mobile unit transmissions from SOA values.
@@ -7,9 +7,6 @@ A TDOA estimator that uses beacon transmissions to synchronise SOAs values from
 different receivers and to estimate TDOA values of mobile unit detections
 relative to beacon detections.
 """
-
-from __future__ import division
-from __future__ import print_function
 
 from bisect import bisect_left, bisect_right
 import collections
@@ -51,7 +48,7 @@ def make_detection_extractor(detections, matches):
             rxpair_detections[(det0.rxid, det1.rxid)].append((det0, det1))
 
     timestamps = {}
-    for pair, detections in rxpair_detections.iteritems():
+    for pair, detections in rxpair_detections.items():
         detections.sort(cmp=lambda x, y: x[0].timestamp < y[0].timestamp)
         timestamps[pair] = [d[0].timestamp for d in detections]
 
@@ -304,7 +301,7 @@ def estimate_tdoas(detections, matches, window_size,
 
 
 def save_tdoa_groups(output, tdoa_groups):
-    if isinstance(output, basestring):
+    if isinstance(output, str):
         output = open(output, 'w')
     for group in tdoa_groups:
         for tdoa in group.tdoas:
@@ -348,7 +345,7 @@ def load_tdoa_groups(fname):
 def load_pos_config(file_):
     strings = parse_kvconfig(file_)
     txfreqs = {int(id_): np.array([float(x) for x in pos_str.split()])
-               for id_, pos_str in strings.iteritems()}
+               for id_, pos_str in strings.items()}
     return txfreqs
 
 

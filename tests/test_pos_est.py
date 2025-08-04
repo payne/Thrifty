@@ -19,7 +19,7 @@ TX_POS = [30, 40]
 
 def gen_tdoa_data(rx_pos, tx_pos):
     tdoas = []
-    for rx0, rx1 in itertools.combinations(rx_pos.keys(), 2):
+    for rx0, rx1 in itertools.combinations(list(rx_pos.keys()), 2):
         rx0_pos = np.array(rx_pos[rx0])
         rx1_pos = np.array(rx_pos[rx1])
         t0 = np.linalg.norm(rx0_pos - tx_pos)
@@ -28,11 +28,16 @@ def gen_tdoa_data(rx_pos, tx_pos):
         tdoas.append((rx0, rx1, tdoa, 0, 0, 0, 0))
     return np.array(tdoas, dtype=tdoa_est.TDOA_DTYPE)
 
-tdoa_array = gen_tdoa_data(RX_POS, TX_POS)
-print(pos_est.solve_numerically(tdoa_array, RX_POS))  # TODO: assert all close
+def test_solve_numerically():
+    tdoa_array = gen_tdoa_data(RX_POS, TX_POS)
+    result = pos_est.solve_numerically(tdoa_array, RX_POS)
+    print(result)  # TODO: assert all close
 
-rx_pairs = zip(tdoa_array['rx0'], tdoa_array['rx1'])
-print(pos_est.dop(TX_POS, RX_POS, rx_pairs))
+def test_dop():
+    tdoa_array = gen_tdoa_data(RX_POS, TX_POS)
+    rx_pairs = list(zip(tdoa_array['rx0'], tdoa_array['rx1']))
+    result = pos_est.dop(TX_POS, RX_POS, rx_pairs)
+    print(result)
 
 
 def test_1d_dop():

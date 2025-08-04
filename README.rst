@@ -6,7 +6,7 @@ SDR hardware such as the RTL-SDR.
 
 Requirements
 ------------
- - `Python <http://www.python.org/>`_ 2.7 or later
+ - `Python <http://www.python.org/>`_ 3.13 or later (conversion by Claude.ai 2025 Aug 02)
  - `Numpy <http://www.numpy.org/>`_
  - [Optional] `matplotlib <http://matplotlib.org/>`_
 
